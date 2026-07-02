@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
+
   const [menuOpen, setMenuOpen] = useState(false);
-  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+const [gallerySlideIndex, setGallerySlideIndex] = useState(0);
 
 
   useEffect(() => {
@@ -52,6 +54,18 @@ function App() {
     '/images/etron.png',
     '/images/cultas.png',
   ];
+
+  const showNextGallerySlide = () => {
+  setGallerySlideIndex((currentIndex) =>
+    currentIndex === galleryImages.length - 1 ? 0 : currentIndex + 1
+  );
+};
+
+const showPreviousGallerySlide = () => {
+  setGallerySlideIndex((currentIndex) =>
+    currentIndex === 0 ? galleryImages.length - 1 : currentIndex - 1
+  );
+};
 
   const selectedImage =
   selectedImageIndex !== null ? galleryImages[selectedImageIndex] : null;
@@ -109,13 +123,13 @@ const closeLightbox = () => {
         <div className="hero-overlay"></div>
 
         <nav className="nav">
-          <a href="#top" className="logo" onClick={closeMenu}>
-            <span>R</span>
-            <div>
-              <strong>Roadrunner Automotive</strong>
-              <small>Surrey, BC</small>
-            </div>
-          </a>
+          <a href="#top" className="logo logo-image-wrap" onClick={closeMenu}>
+  <img
+    src="/images/roadrunner-logo.png"
+    alt="Roadrunner Automotive logo"
+    className="site-logo"
+  />
+</a>
 
           <div className="nav-links">
             <a href="#services">Services</a>
@@ -310,19 +324,55 @@ const closeLightbox = () => {
   </span>
 </div>
 
-<div className="gallery-grid">
-  {galleryImages.map((image, index) => (
-    <button
-      className="gallery-card reveal"
-      key={image}
-      style={{ transitionDelay: `${index * 45}ms` }}
-      onClick={() => setSelectedImageIndex(index)}
-      type="button"
-    >
-      <img src={image} alt="Roadrunner Automotive vehicle work" />
-    </button>
-  ))}
+<div className="gallery-slider reveal">
+  <button
+    className="gallery-slide-arrow gallery-slide-prev"
+    onClick={showPreviousGallerySlide}
+    type="button"
+    aria-label="Previous gallery image"
+  >
+    ‹
+  </button>
+
+  <button
+    className="gallery-slide-image"
+    onClick={() => setSelectedImageIndex(gallerySlideIndex)}
+    type="button"
+  >
+    <img
+      src={galleryImages[gallerySlideIndex]}
+      alt="Roadrunner Automotive vehicle work"
+    />
+  </button>
+
+  <button
+    className="gallery-slide-arrow gallery-slide-next"
+    onClick={showNextGallerySlide}
+    type="button"
+    aria-label="Next gallery image"
+  >
+    ›
+  </button>
+
+  <div className="gallery-slide-bottom">
+    <span>
+      {gallerySlideIndex + 1} / {galleryImages.length}
+    </span>
+
+    <div className="gallery-dots">
+      {galleryImages.map((image, index) => (
+        <button
+          key={image}
+          className={gallerySlideIndex === index ? 'active' : ''}
+          onClick={() => setGallerySlideIndex(index)}
+          type="button"
+          aria-label={`Show gallery image ${index + 1}`}
+        ></button>
+      ))}
+    </div>
+  </div>
 </div>
+
 
 
       </section>
