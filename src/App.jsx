@@ -3,7 +3,6 @@ import './App.css';
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const [gallerySlideIndex, setGallerySlideIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
@@ -62,6 +61,12 @@ function App() {
     '/images/cultas.png',
   ];
 
+  const visibleGalleryImages = [
+    galleryImages[gallerySlideIndex],
+    galleryImages[(gallerySlideIndex + 1) % galleryImages.length],
+    galleryImages[(gallerySlideIndex + 2) % galleryImages.length],
+  ];
+
   const showNextGallerySlide = () => {
     setGallerySlideIndex((currentIndex) =>
       currentIndex === galleryImages.length - 1 ? 0 : currentIndex + 1
@@ -72,27 +77,6 @@ function App() {
     setGallerySlideIndex((currentIndex) =>
       currentIndex === 0 ? galleryImages.length - 1 : currentIndex - 1
     );
-  };
-
-  const selectedImage =
-    selectedImageIndex !== null ? galleryImages[selectedImageIndex] : null;
-
-  const showNextImage = (event) => {
-    event.stopPropagation();
-    setSelectedImageIndex((currentIndex) =>
-      currentIndex === galleryImages.length - 1 ? 0 : currentIndex + 1
-    );
-  };
-
-  const showPreviousImage = (event) => {
-    event.stopPropagation();
-    setSelectedImageIndex((currentIndex) =>
-      currentIndex === 0 ? galleryImages.length - 1 : currentIndex - 1
-    );
-  };
-
-  const closeLightbox = () => {
-    setSelectedImageIndex(null);
   };
 
   const reviews = [
@@ -122,29 +106,31 @@ function App() {
 
   return (
     <>
-      {loading && (
-        <div className="loading-screen">
-          <video className="loading-video" autoPlay muted playsInline>
-            <source src="/videos/burnout.mp4" type="video/mp4" />
-          </video>
+   {loading && (
+  <div className="loading-screen">
+    <img
+      src="/images/loadscreen.png"
+      alt="Roadrunner Automotive loading background"
+      className="loading-image"
+    />
 
-          <div className="loading-overlay"></div>
+    <div className="loading-overlay"></div>
 
-          <div className="loading-content">
-            <img
-              src="/images/roadrunner-logo.png"
-              alt="Roadrunner Automotive logo"
-              className="loading-logo"
-            />
+    <div className="loading-content">
+      <img
+        src="/images/roadrunner-logo.png"
+        alt="Roadrunner Automotive logo"
+        className="loading-logo"
+      />
 
-            <div className="loading-line">
-              <span></span>
-            </div>
+      <div className="loading-line">
+        <span></span>
+      </div>
 
-            <p>Quality service starts here</p>
-          </div>
-        </div>
-      )}
+      <p>Quality service starts here</p>
+    </div>
+  </div>
+)}
 
       <main className={loading ? 'site-hidden' : 'site-visible'}>
         <section className="hero" id="top">
@@ -191,18 +177,10 @@ function App() {
           </nav>
 
           <div className={`mobile-menu ${menuOpen ? 'show' : ''}`}>
-            <a href="#services" onClick={closeMenu}>
-              Services
-            </a>
-            <a href="#gallery" onClick={closeMenu}>
-              Gallery
-            </a>
-            <a href="#reviews" onClick={closeMenu}>
-              Reviews
-            </a>
-            <a href="#contact" onClick={closeMenu}>
-              Contact
-            </a>
+            <a href="#services" onClick={closeMenu}>Services</a>
+            <a href="#gallery" onClick={closeMenu}>Gallery</a>
+            <a href="#reviews" onClick={closeMenu}>Reviews</a>
+            <a href="#contact" onClick={closeMenu}>Contact</a>
             <a
               href="https://www.instagram.com/roadrunner.automotive/?hl=en"
               target="_blank"
@@ -359,65 +337,61 @@ function App() {
           </div>
         </section>
 
-        <section className="section gallery-section" id="gallery">
-          <div className="section-heading reveal">
-            <p>Gallery</p>
-            <h2>Vehicles serviced with care.</h2>
-            <span>
-              A look at the vehicles, repairs, and shop work handled by
-              Roadrunner Automotive.
-            </span>
-          </div>
+       <section className="section gallery-section" id="gallery">
+        
+  <div className="section-heading reveal">
+    <p>Gallery</p>
+    <h2>Recent vehicles and shop work.</h2>
+    <span>
+      A clean look at the vehicles, repairs, and work handled by Roadrunner
+      Automotive.
+    </span>
+  </div>
 
-          <div className="gallery-slider reveal">
-            <button
-              className="gallery-slide-arrow gallery-slide-prev"
-              onClick={showPreviousGallerySlide}
-              type="button"
-              aria-label="Previous gallery image"
-            >
-              ‹
-            </button>
+  <div className="gallery-carousel reveal">
+    <button
+      className="gallery-slide-arrow gallery-slide-prev"
+      onClick={showPreviousGallerySlide}
+      type="button"
+      aria-label="Previous gallery image"
+    >
+      ‹
+    </button>
 
-            <button
-              className="gallery-slide-image"
-              onClick={() => setSelectedImageIndex(gallerySlideIndex)}
-              type="button"
-            >
-              <img
-                src={galleryImages[gallerySlideIndex]}
-                alt="Roadrunner Automotive vehicle work"
-              />
-            </button>
+    <div className="gallery-track">
+      {visibleGalleryImages.map((image, index) => (
+        <div className="gallery-panel" key={`${image}-${index}`}>
+          <img src={image} alt="Roadrunner Automotive vehicle work" />
+        </div>
+      ))}
+    </div>
 
-            <button
-              className="gallery-slide-arrow gallery-slide-next"
-              onClick={showNextGallerySlide}
-              type="button"
-              aria-label="Next gallery image"
-            >
-              ›
-            </button>
+    <button
+      className="gallery-slide-arrow gallery-slide-next"
+      onClick={showNextGallerySlide}
+      type="button"
+      aria-label="Next gallery image"
+    >
+      ›
+    </button>
 
-            <div className="gallery-slide-bottom">
-              <span>
-                {gallerySlideIndex + 1} / {galleryImages.length}
-              </span>
+    <div className="gallery-slide-bottom">
+      <span>{gallerySlideIndex + 1} / {galleryImages.length}</span>
 
-              <div className="gallery-dots">
-                {galleryImages.map((image, index) => (
-                  <button
-                    key={image}
-                    className={gallerySlideIndex === index ? 'active' : ''}
-                    onClick={() => setGallerySlideIndex(index)}
-                    type="button"
-                    aria-label={`Show gallery image ${index + 1}`}
-                  ></button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+      <div className="gallery-dots">
+        {galleryImages.map((image, index) => (
+          <button
+            key={image}
+            className={gallerySlideIndex === index ? 'active' : ''}
+            onClick={() => setGallerySlideIndex(index)}
+            type="button"
+            aria-label={`Show gallery image ${index + 1}`}
+          ></button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
 
         <section className="section reviews-section" id="reviews">
           <div className="section-heading reveal">
@@ -511,47 +485,6 @@ function App() {
           <p>© 2026 Roadrunner Automotive. All rights reserved.</p>
           <p>Created by Pacific Tech Solutions</p>
         </footer>
-
-        {selectedImage && (
-          <div className="lightbox" onClick={closeLightbox}>
-            <button
-              className="lightbox-close"
-              onClick={closeLightbox}
-              type="button"
-              aria-label="Close image"
-            >
-              ×
-            </button>
-
-            <button
-              className="lightbox-arrow lightbox-prev"
-              onClick={showPreviousImage}
-              type="button"
-              aria-label="Previous image"
-            >
-              ‹
-            </button>
-
-            <img
-              src={selectedImage}
-              alt="Roadrunner Automotive full size"
-              onClick={(event) => event.stopPropagation()}
-            />
-
-            <button
-              className="lightbox-arrow lightbox-next"
-              onClick={showNextImage}
-              type="button"
-              aria-label="Next image"
-            >
-              ›
-            </button>
-
-            <div className="lightbox-counter">
-              {selectedImageIndex + 1} / {galleryImages.length}
-            </div>
-          </div>
-        )}
 
         <a href="#top" className="back-to-top" aria-label="Back to top">
           ↑
