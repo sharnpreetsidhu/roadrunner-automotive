@@ -1351,3 +1351,139 @@ footer p {
     height: 340px;
   }
 }
+/* LOADING SCREEN */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #030508;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  animation: loadingFadeOut 0.65s ease 2.65s forwards;
+}
+
+.loading-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.04);
+  filter: contrast(1.08) saturate(1.1);
+}
+
+.loading-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(3, 5, 8, 0.18), rgba(3, 5, 8, 0.82)),
+    radial-gradient(circle at 50% 50%, rgba(255, 193, 7, 0.12), transparent 38%),
+    rgba(3, 5, 8, 0.28);
+}
+
+.loading-content {
+  position: relative;
+  z-index: 2;
+  width: min(620px, 86vw);
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  animation: loadingContentIn 0.8s ease both;
+}
+
+.loading-logo {
+  width: min(420px, 82vw);
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 26px;
+  filter: drop-shadow(0 22px 48px rgba(0, 0, 0, 0.75));
+}
+
+.loading-line {
+  width: min(360px, 70vw);
+  height: 4px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.18);
+  margin-bottom: 16px;
+}
+
+.loading-line span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ffc107, #ff5a1f);
+  animation: loadingProgress 2.55s ease forwards;
+}
+
+.loading-content p {
+  margin: 0;
+  color: #e5e7eb;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.site-hidden {
+  opacity: 0;
+}
+
+.site-visible {
+  opacity: 1;
+  animation: siteFadeIn 0.65s ease both;
+}
+
+@keyframes loadingProgress {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes loadingContentIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes loadingFadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+@keyframes siteFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 700px) {
+  .loading-logo {
+    width: min(310px, 82vw);
+  }
+
+  .loading-content p {
+    font-size: 0.68rem;
+  }
+}
