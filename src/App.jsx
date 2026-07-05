@@ -5,6 +5,7 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [gallerySlideIndex, setGallerySlideIndex] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {
     const revealElements = document.querySelectorAll('.reveal');
@@ -35,6 +36,19 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 650);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const services = [
     'Diagnostics & Troubleshooting',
     'Brake Service',
@@ -59,12 +73,6 @@ function App() {
     '/images/c63.png',
     '/images/etron.png',
     '/images/cultas.png',
-  ];
-
-  const visibleGalleryImages = [
-    galleryImages[gallerySlideIndex],
-    galleryImages[(gallerySlideIndex + 1) % galleryImages.length],
-    galleryImages[(gallerySlideIndex + 2) % galleryImages.length],
   ];
 
   const showNextGallerySlide = () => {
@@ -106,31 +114,31 @@ function App() {
 
   return (
     <>
-   {loading && (
-  <div className="loading-screen">
-    <img
-      src="/images/loadscreen.png"
-      alt="Roadrunner Automotive loading background"
-      className="loading-image"
-    />
+      {loading && (
+        <div className="loading-screen">
+          <img
+            src="/images/loadscreen.png"
+            alt="Roadrunner Automotive loading background"
+            className="loading-image"
+          />
 
-    <div className="loading-overlay"></div>
+          <div className="loading-overlay"></div>
 
-    <div className="loading-content">
-      <img
-        src="/images/roadrunner-logo.png"
-        alt="Roadrunner Automotive logo"
-        className="loading-logo"
-      />
+          <div className="loading-content">
+            <img
+              src="/images/roadrunner-logo.png"
+              alt="Roadrunner Automotive logo"
+              className="loading-logo"
+            />
 
-      <div className="loading-line">
-        <span></span>
-      </div>
+            <div className="loading-line">
+              <span></span>
+            </div>
 
-      <p>Quality service starts here</p>
-    </div>
-  </div>
-)}
+            <p>Quality service starts here</p>
+          </div>
+        </div>
+      )}
 
       <main className={loading ? 'site-hidden' : 'site-visible'}>
         <section className="hero" id="top">
@@ -192,8 +200,14 @@ function App() {
           </div>
 
           <div className="hero-content">
-            <div className="hero-kicker reveal">Trusted Surrey Auto Repair Shop</div>
-            <h1 className="reveal">Reliable auto repair with honest service.</h1>
+            <div className="hero-kicker reveal">
+              Trusted Surrey Auto Repair Shop
+            </div>
+
+            <h1 className="reveal">
+              Reliable auto repair with honest service.
+            </h1>
+
             <p className="hero-subtext reveal">
               Roadrunner Automotive delivers reliable diagnostics, repairs, and
               maintenance with honest communication, quality workmanship, and a
@@ -204,6 +218,7 @@ function App() {
               <a href="tel:6045360133" className="btn primary">
                 Call Now
               </a>
+
               <a
                 href="https://www.google.com/maps/search/?api=1&query=2178+King+George+Blvd+Surrey+BC+V4A+5A2"
                 target="_blank"
@@ -212,6 +227,7 @@ function App() {
               >
                 Get Directions
               </a>
+
               <a
                 href="https://www.instagram.com/roadrunner.automotive/?hl=en"
                 target="_blank"
@@ -227,10 +243,12 @@ function App() {
                 <strong>4.9 ★★★★★</strong>
                 <span>100+ Google Reviews</span>
               </div>
+
               <div className="badge">
                 <strong>Mon–Fri</strong>
                 <span>9:00 a.m. – 5:30 p.m.</span>
               </div>
+
               <div className="badge">
                 <strong>Surrey, BC</strong>
                 <span>2178 King George Blvd</span>
@@ -249,10 +267,12 @@ function App() {
             <h2>100+</h2>
             <p>Google Reviews</p>
           </div>
+
           <div>
             <h2>4.9</h2>
             <p>Average Rating</p>
           </div>
+
           <div>
             <h2>Trusted</h2>
             <p>Surrey Auto Repair</p>
@@ -324,10 +344,12 @@ function App() {
                   <strong>01</strong>
                   <span>Honest diagnostics</span>
                 </div>
+
                 <div>
                   <strong>02</strong>
                   <span>Quality workmanship</span>
                 </div>
+
                 <div>
                   <strong>03</strong>
                   <span>Trusted by locals</span>
@@ -337,61 +359,59 @@ function App() {
           </div>
         </section>
 
-       <section className="section gallery-section" id="gallery">
-        
-  <div className="section-heading reveal">
-    <p>Gallery</p>
-    <h2>Recent vehicles and shop work.</h2>
-    <span>
-      A clean look at the vehicles, repairs, and work handled by Roadrunner
-      Automotive.
-    </span>
-  </div>
+        <section className="section gallery-section" id="gallery">
+          <div className="section-heading reveal">
+            <p>Gallery</p>
+            <h2>Recent vehicles and shop work.</h2>
+            <span>
+              A clean look at the vehicles, repairs, and work handled by
+              Roadrunner Automotive.
+            </span>
+          </div>
 
-  <div className="gallery-carousel reveal">
-    <button
-      className="gallery-slide-arrow gallery-slide-prev"
-      onClick={showPreviousGallerySlide}
-      type="button"
-      aria-label="Previous gallery image"
-    >
-      ‹
-    </button>
+          <div className="gallery-showcase reveal">
+            <button
+              className="gallery-slide-arrow gallery-slide-prev"
+              onClick={showPreviousGallerySlide}
+              type="button"
+              aria-label="Previous gallery image"
+            >
+              ‹
+            </button>
 
-    <div className="gallery-track">
-      {visibleGalleryImages.map((image, index) => (
-        <div className="gallery-panel" key={`${image}-${index}`}>
-          <img src={image} alt="Roadrunner Automotive vehicle work" />
-        </div>
-      ))}
-    </div>
+            <div className="gallery-single-image">
+              <img
+                src={galleryImages[gallerySlideIndex]}
+                alt="Roadrunner Automotive vehicle work"
+              />
+            </div>
 
-    <button
-      className="gallery-slide-arrow gallery-slide-next"
-      onClick={showNextGallerySlide}
-      type="button"
-      aria-label="Next gallery image"
-    >
-      ›
-    </button>
+            <button
+              className="gallery-slide-arrow gallery-slide-next"
+              onClick={showNextGallerySlide}
+              type="button"
+              aria-label="Next gallery image"
+            >
+              ›
+            </button>
 
-    <div className="gallery-slide-bottom">
-      <span>{gallerySlideIndex + 1} / {galleryImages.length}</span>
+            <div className="gallery-slide-bottom">
+              <span>{gallerySlideIndex + 1} / {galleryImages.length}</span>
 
-      <div className="gallery-dots">
-        {galleryImages.map((image, index) => (
-          <button
-            key={image}
-            className={gallerySlideIndex === index ? 'active' : ''}
-            onClick={() => setGallerySlideIndex(index)}
-            type="button"
-            aria-label={`Show gallery image ${index + 1}`}
-          ></button>
-        ))}
-      </div>
-    </div>
-  </div>
-</section>
+              <div className="gallery-dots">
+                {galleryImages.map((image, index) => (
+                  <button
+                    key={image}
+                    className={gallerySlideIndex === index ? 'active' : ''}
+                    onClick={() => setGallerySlideIndex(index)}
+                    type="button"
+                    aria-label={`Show gallery image ${index + 1}`}
+                  ></button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section className="section reviews-section" id="reviews">
           <div className="section-heading reveal">
@@ -444,13 +464,16 @@ function App() {
                 <strong>Address:</strong> 2178 King George Blvd, Surrey, BC V4A
                 5A2
               </p>
+
               <p>
                 <strong>Phone:</strong>{' '}
                 <a href="tel:6045360133">(604) 536-0133</a>
               </p>
+
               <p>
                 <strong>Hours:</strong> Monday–Friday, 9:00 a.m.–5:30 p.m.
               </p>
+
               <p>
                 <strong>Province:</strong> British Columbia
               </p>
@@ -459,6 +482,7 @@ function App() {
                 <a href="tel:6045360133" className="btn primary">
                   Call the Shop
                 </a>
+
                 <a
                   href="https://www.google.com/maps/search/?api=1&query=2178+King+George+Blvd+Surrey+BC+V4A+5A2"
                   className="btn secondary"
@@ -486,7 +510,11 @@ function App() {
           <p>Created by Pacific Tech Solutions</p>
         </footer>
 
-        <a href="#top" className="back-to-top" aria-label="Back to top">
+        <a
+          href="#top"
+          className={`back-to-top ${showBackToTop ? 'show' : ''}`}
+          aria-label="Back to top"
+        >
           ↑
         </a>
       </main>
