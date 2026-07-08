@@ -49,14 +49,38 @@ function App() {
     };
   }, []);
 
-  const services = [
-    'Diagnostics & Troubleshooting',
-    'Brake Service',
-    'Oil Changes & Maintenance',
-    'Suspension & Steering',
-    'Engine Repair',
-    'General Auto Repair',
-  ];
+const services = [
+  {
+    title: 'Diagnostics & Troubleshooting',
+    description:
+      'Advanced diagnostics to find the real issue quickly, explain it clearly, and avoid unnecessary repairs.',
+  },
+  {
+    title: 'Brake Service',
+    description:
+      'Brake inspections, pads, rotors, and repairs to keep your vehicle stopping safely and smoothly.',
+  },
+  {
+    title: 'Oil Changes & Maintenance',
+    description:
+      'Routine maintenance using quality parts and fluids to help extend the life of your vehicle.',
+  },
+  {
+    title: 'Suspension & Steering',
+    description:
+      'Repairs that improve ride comfort, handling, alignment, and overall driving safety.',
+  },
+  {
+    title: 'Engine Repair',
+    description:
+      'Reliable engine repair handled with honest communication and attention to detail.',
+  },
+  {
+    title: 'General Auto Repair',
+    description:
+      'Dependable repair work for daily drivers, imports, and performance vehicles.',
+  },
+];
 
   const galleryImages = [
     '/images/audi.jpg',
@@ -219,7 +243,7 @@ function App() {
             </div>
 
             <h1 className="reveal">
-              Reliable auto repair with honest service.
+              Owner Operated. Honest Repairs. No Shortcuts.
             </h1>
 
             <p className="hero-subtext reveal">
@@ -255,7 +279,7 @@ function App() {
             <div className="hero-badges reveal">
               <div className="badge">
                 <strong>4.9 ★★★★★</strong>
-                <span>100+ Google Reviews</span>
+                <span>100+ Five-Star Reviews</span>
               </div>
 
               <div className="badge">
@@ -279,17 +303,17 @@ function App() {
         <section className="stats reveal">
           <div>
             <h2>100+</h2>
-            <p>Google Reviews</p>
+            <p>Five-Star Reviews</p>
           </div>
 
           <div>
-            <h2>4.9</h2>
-            <p>Average Rating</p>
+            <h2>Certified</h2>
+            <p>Technicians</p>
           </div>
 
           <div>
-            <h2>Trusted</h2>
-            <p>Surrey Auto Repair</p>
+            <h2>Owner</h2>
+            <p>Operated</p>
           </div>
         </section>
 
@@ -322,14 +346,13 @@ function App() {
             {services.map((service, index) => (
               <div
                 className="service-card reveal"
-                key={service}
+                key={service.title}
                 style={{ transitionDelay: `${index * 70}ms` }}
               >
                 <div className="service-icon">⚙</div>
-                <h3>{service}</h3>
+                <h3>{service.title}</h3>
                 <p>
-                  Professional service focused on quality, efficiency, fair
-                  pricing, and getting customers safely back on the road.
+                  {service.description}
                 </p>
               </div>
             ))}
