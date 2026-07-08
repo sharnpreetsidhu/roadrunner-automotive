@@ -33,7 +33,10 @@ main {
   overflow-x: hidden;
 }
 
-/* HERO */
+/* ============================= */
+/* HERO SECTION */
+/* ============================= */
+
 .hero {
   min-height: 100vh;
   position: relative;
@@ -90,7 +93,10 @@ main {
   z-index: -1;
 }
 
-/* NAV */
+/* ============================= */
+/* NAVIGATION */
+/* ============================= */
+
 .nav {
   position: relative;
   z-index: 20;
@@ -148,7 +154,10 @@ main {
   border: 1px solid rgba(255, 193, 7, 0.22);
 }
 
+/* ============================= */
 /* MOBILE MENU */
+/* ============================= */
+
 .menu-btn {
   width: 48px;
   height: 48px;
@@ -227,7 +236,10 @@ main {
   color: #ffc107;
 }
 
+/* ============================= */
 /* HERO CONTENT */
+/* ============================= */
+
 .hero-content {
   max-width: 870px;
   padding: 125px 0 105px;
@@ -373,7 +385,10 @@ h1 {
   animation: scrollDot 1.4s ease-in-out infinite;
 }
 
+/* ============================= */
 /* STATS */
+/* ============================= */
+
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -405,7 +420,10 @@ h1 {
   color: #d1d5db;
 }
 
+/* ============================= */
 /* GENERAL SECTIONS */
+/* ============================= */
+
 .section {
   padding: 112px 7%;
 }
@@ -440,7 +458,10 @@ h1 {
   font-size: 1.04rem;
 }
 
+/* ============================= */
 /* INTRO */
+/* ============================= */
+
 .intro-section {
   display: grid;
   grid-template-columns: 1fr 0.85fr;
@@ -475,7 +496,10 @@ h1 {
   margin-bottom: 0;
 }
 
+/* ============================= */
 /* SERVICES */
+/* ============================= */
+
 .service-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -539,7 +563,10 @@ h1 {
   margin-bottom: 0;
 }
 
+/* ============================= */
 /* FEATURE VIDEO */
+/* ============================= */
+
 .feature-video-section {
   padding: 0 7%;
 }
@@ -615,7 +642,11 @@ h1 {
   font-weight: 800;
 }
 
+/* ============================= */
 /* GALLERY */
+/* Full image is always shown. No cropping. */
+/* ============================= */
+
 .gallery-section {
   background:
     radial-gradient(circle at 15% 20%, rgba(255, 193, 7, 0.09), transparent 25%),
@@ -625,8 +656,10 @@ h1 {
 
 .gallery-showcase {
   position: relative;
+  max-width: 1080px;
+  margin: 0 auto;
   border-radius: 34px;
-  padding: 24px;
+  padding: 20px;
   background:
     linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025));
   border: 1px solid rgba(255, 193, 7, 0.26);
@@ -637,7 +670,7 @@ h1 {
 }
 
 .gallery-single-image {
-  height: 620px;
+  height: 520px;
   border-radius: 28px;
   overflow: hidden;
   background:
@@ -652,6 +685,7 @@ h1 {
   justify-content: center;
 }
 
+/* This is the key rule: full image shows with no cropping */
 .gallery-single-image img {
   width: auto;
   height: auto;
@@ -736,7 +770,10 @@ h1 {
   background: #ffc107;
 }
 
+/* ============================= */
 /* REVIEWS */
+/* ============================= */
+
 .reviews-section {
   background:
     linear-gradient(180deg, #080c12, #05070a);
@@ -810,7 +847,10 @@ h1 {
   font-weight: 850;
 }
 
+/* ============================= */
 /* CONTACT */
+/* ============================= */
+
 .contact-section {
   display: grid;
   grid-template-columns: 1fr 1.1fr;
@@ -853,7 +893,10 @@ h1 {
   filter: grayscale(18%) contrast(108%);
 }
 
+/* ============================= */
 /* FOOTER */
+/* ============================= */
+
 footer {
   padding: 30px 7%;
   display: flex;
@@ -868,7 +911,11 @@ footer p {
   margin-bottom: 0;
 }
 
-/* BACK TO TOP */
+/* ============================= */
+/* BACK TO TOP BUTTON */
+/* Only shows after scroll when React adds .show */
+/* ============================= */
+
 .back-to-top {
   position: fixed;
   right: 22px;
@@ -899,7 +946,11 @@ footer p {
   transform: translateY(-5px);
 }
 
-/* SCROLL REVEAL */
+/* ============================= */
+/* SCROLL REVEAL ANIMATION */
+/* Used by .reveal elements in App.jsx */
+/* ============================= */
+
 .reveal {
   opacity: 0;
   transform: translateY(34px);
@@ -913,7 +964,11 @@ footer p {
   transform: translateY(0);
 }
 
+/* ============================= */
 /* LOADING SCREEN */
+/* Audi cinematic intro */
+/* ============================= */
+
 .loading-screen {
   position: fixed;
   inset: 0;
@@ -925,51 +980,94 @@ footer p {
   animation: loadingFadeOut 0.65s ease 2.65s forwards;
 }
 
+/* Audi background image */
 .loading-image {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   background: #030508;
-  transform: scale(1);
-  filter: contrast(1.08) saturate(1.08);
+  transform: scale(1.12);
+  filter: contrast(1.14) saturate(1.1) brightness(0.68);
+  animation: loadingImageMove 3s ease forwards;
 }
 
+/* Dark overlay for cinematic look and readable logo/text */
 .loading-overlay {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to bottom, rgba(3, 5, 8, 0.18), rgba(3, 5, 8, 0.78)),
-    radial-gradient(circle at 50% 45%, rgba(255, 193, 7, 0.12), transparent 38%);
+    linear-gradient(to right, rgba(3, 5, 8, 0.95), rgba(3, 5, 8, 0.45), rgba(3, 5, 8, 0.9)),
+    linear-gradient(to bottom, rgba(3, 5, 8, 0.2), rgba(3, 5, 8, 0.92)),
+    radial-gradient(circle at 25% 45%, rgba(255, 193, 7, 0.26), transparent 30%),
+    radial-gradient(circle at 72% 35%, rgba(255, 90, 31, 0.2), transparent 30%);
 }
 
+/* Subtle animated grid overlay */
+.loading-screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 58px 58px;
+  mask-image: linear-gradient(to bottom, black, transparent 82%);
+  pointer-events: none;
+}
+
+/* Loading logo, headline, and progress bar */
 .loading-content {
   position: relative;
   z-index: 2;
-  width: min(620px, 86vw);
+  width: min(760px, 88vw);
   display: grid;
   justify-items: center;
   text-align: center;
   animation: loadingContentIn 0.8s ease both;
-  margin-top: 360px;
 }
 
 .loading-logo {
-  width: min(360px, 76vw);
+  width: min(390px, 78vw);
   height: auto;
   object-fit: contain;
-  margin-bottom: 24px;
-  filter: drop-shadow(0 22px 48px rgba(0, 0, 0, 0.85));
+  margin-bottom: 28px;
+  filter: drop-shadow(0 28px 55px rgba(0, 0, 0, 0.9));
 }
 
+.loading-text-wrap {
+  margin-bottom: 24px;
+}
+
+.loading-kicker {
+  margin: 0 0 10px;
+  color: #ffc107;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.78rem;
+  font-weight: 950;
+}
+
+.loading-text-wrap h2 {
+  margin: 0;
+  color: white;
+  font-size: clamp(2.1rem, 5vw, 4.4rem);
+  line-height: 0.95;
+  letter-spacing: -0.065em;
+  text-wrap: balance;
+  text-shadow: 0 20px 60px rgba(0, 0, 0, 0.75);
+}
+
+/* Loading progress bar */
 .loading-line {
-  width: min(360px, 70vw);
-  height: 4px;
+  width: min(420px, 72vw);
+  height: 5px;
   border-radius: 999px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.18);
-  margin-bottom: 16px;
+  box-shadow: 0 0 35px rgba(255, 193, 7, 0.14);
 }
 
 .loading-line span {
@@ -981,15 +1079,7 @@ footer p {
   animation: loadingProgress 2.55s ease forwards;
 }
 
-.loading-content p {
-  margin: 0;
-  color: #e5e7eb;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-size: 0.78rem;
-  font-weight: 900;
-}
-
+/* Website fades in after the loading screen leaves */
 .site-hidden {
   opacity: 0;
 }
@@ -999,7 +1089,11 @@ footer p {
   animation: siteFadeIn 0.65s ease both;
 }
 
-/* ANIMATIONS */
+/* ============================= */
+/* ANIMATIONS / KEYFRAMES */
+/* ============================= */
+
+/* Navbar loads from top */
 @keyframes fadeDown {
   from {
     opacity: 0;
@@ -1012,6 +1106,7 @@ footer p {
   }
 }
 
+/* Little scroll dot animation in hero */
 @keyframes scrollDot {
   0% {
     transform: translateY(0);
@@ -1029,6 +1124,18 @@ footer p {
   }
 }
 
+/* Audi image slow zoom on loading screen */
+@keyframes loadingImageMove {
+  from {
+    transform: scale(1.12);
+  }
+
+  to {
+    transform: scale(1.04);
+  }
+}
+
+/* Loading progress bar fills */
 @keyframes loadingProgress {
   from {
     width: 0%;
@@ -1039,6 +1146,7 @@ footer p {
   }
 }
 
+/* Loading logo/text intro */
 @keyframes loadingContentIn {
   from {
     opacity: 0;
@@ -1051,6 +1159,7 @@ footer p {
   }
 }
 
+/* Loading screen fades out */
 @keyframes loadingFadeOut {
   to {
     opacity: 0;
@@ -1059,6 +1168,7 @@ footer p {
   }
 }
 
+/* Main website fades in after loading */
 @keyframes siteFadeIn {
   from {
     opacity: 0;
@@ -1071,7 +1181,10 @@ footer p {
   }
 }
 
+/* ============================= */
 /* TABLET */
+/* ============================= */
+
 @media (max-width: 1150px) {
   .service-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1084,7 +1197,10 @@ footer p {
   }
 }
 
+/* ============================= */
 /* MOBILE */
+/* ============================= */
+
 @media (max-width: 820px) {
   .hero,
   .section {
@@ -1195,16 +1311,20 @@ footer p {
     padding-right: 5%;
   }
 
-  .loading-content {
-    margin-top: 300px;
-  }
-
+  /* Loading screen mobile */
   .loading-logo {
     width: min(300px, 78vw);
   }
+
+  .loading-text-wrap h2 {
+    font-size: 2.5rem;
+  }
 }
 
+/* ============================= */
 /* SMALL MOBILE */
+/* ============================= */
+
 @media (max-width: 500px) {
   .site-logo {
     width: 155px;
@@ -1227,15 +1347,16 @@ footer p {
     height: 310px;
   }
 
-  .loading-content {
-    margin-top: 260px;
-  }
-
+  /* Loading screen small mobile */
   .loading-logo {
-    width: min(250px, 78vw);
+    width: min(245px, 78vw);
   }
 
-  .loading-content p {
-    font-size: 0.68rem;
+  .loading-kicker {
+    font-size: 0.64rem;
+  }
+
+  .loading-text-wrap h2 {
+    font-size: 2rem;
   }
 }

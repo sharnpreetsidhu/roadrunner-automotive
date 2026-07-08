@@ -87,6 +87,17 @@ function App() {
     );
   };
 
+  useEffect(() => {
+  const timer = setInterval(() => {
+    setGallerySlideIndex((currentIndex) =>
+      currentIndex === galleryImages.length - 1 ? 0 : currentIndex + 1
+    );
+  }, 3500);
+
+  return () => clearInterval(timer);
+}, [galleryImages.length]);
+
+
   const reviews = [
     {
       name: 'Sharnpreet Sidhu',
@@ -114,31 +125,34 @@ function App() {
 
   return (
     <>
-      {loading && (
-        <div className="loading-screen">
-          <img
-            src="/images/loadscreen.png"
-            alt="Roadrunner Automotive loading background"
-            className="loading-image"
-          />
+     {loading && (
+  <div className="loading-screen">
+    <img
+      src="/images/audi.jpg"
+      alt="Roadrunner Automotive loading background"
+      className="loading-image"
+    />
 
-          <div className="loading-overlay"></div>
+    <div className="loading-overlay"></div>
 
-          <div className="loading-content">
-            <img
-              src="/images/roadrunner-logo.png"
-              alt="Roadrunner Automotive logo"
-              className="loading-logo"
-            />
+    <div className="loading-content">
+      <img
+        src="/images/roadrunner-logo.png"
+        alt="Roadrunner Automotive logo"
+        className="loading-logo"
+      />
 
-            <div className="loading-line">
-              <span></span>
-            </div>
+      <div className="loading-text-wrap">
+        <p className="loading-kicker">Roadrunner Automotive</p>
+        <h2>Precision service. Built for the road.</h2>
+      </div>
 
-            <p>Quality service starts here</p>
-          </div>
-        </div>
-      )}
+      <div className="loading-line">
+        <span></span>
+      </div>
+    </div>
+  </div>
+)}
 
       <main className={loading ? 'site-hidden' : 'site-visible'}>
         <section className="hero" id="top">
