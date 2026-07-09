@@ -68,18 +68,6 @@ main {
   z-index: -3;
 }
 
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
-  background-size: 58px 58px;
-  mask-image: linear-gradient(to bottom, black, transparent 78%);
-  pointer-events: none;
-  z-index: -2;
-}
 
 .hero::after {
   content: '';
@@ -1004,19 +992,6 @@ footer p {
     radial-gradient(circle at 72% 35%, rgba(255, 90, 31, 0.2), transparent 30%);
 }
 
-/* Subtle animated grid overlay */
-.loading-screen::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 58px 58px;
-  mask-image: linear-gradient(to bottom, black, transparent 82%);
-  pointer-events: none;
-}
 
 /* Loading logo, headline, and progress bar */
 .loading-content {
