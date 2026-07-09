@@ -62,10 +62,12 @@ main {
   inset: 0;
   background:
     linear-gradient(to bottom, rgba(5, 7, 10, 0.5), rgba(5, 7, 10, 0.92)),
-    linear-gradient(to right, rgba(5, 7, 10, 0.92), rgba(5, 7, 10, 0.3), rgba(5, 7, 10, 0.86)),
-    radial-gradient(circle at 18% 25%, rgba(255, 193, 7, 0.22), transparent 30%),
-    radial-gradient(circle at 78% 20%, rgba(255, 90, 31, 0.18), transparent 30%);
+    linear-gradient(to right, rgba(5, 7, 10, 0.92), rgba(5, 7, 10, 0.3), rgba(5, 7, 10, 0.86));
   z-index: -3;
+}
+
+.hero::after {
+  display: none;
 }
 
 
